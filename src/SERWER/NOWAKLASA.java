@@ -1,2 +1,2 @@
 public class NOWAKLASA{
-}
+}//bagno
