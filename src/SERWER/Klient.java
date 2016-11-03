@@ -23,4 +23,4 @@ public class Klient {
             
 		        socket.close();
 		}
-}
+}//komentarsz
