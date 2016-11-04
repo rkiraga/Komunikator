@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.*;
 import java.util.ArrayList;
+import static java.lang.Thread.sleep;
 
 public class A_Chat_Client_GUI {
     
@@ -44,10 +45,25 @@ public class A_Chat_Client_GUI {
     private static JButton B_EXIT_Yes = new JButton("Jestem siur");
     private static JButton B_EXIT_No  = new JButton("NEIN");
     
+    protected final static int MW_width = 510, MW_height = 320;
+    
     public static void main(String[] args) 
     {
         BuildMainWindow();
         Initialize();
+        
+        while (true) {
+
+            try{
+                sleep(250);
+                if(MainWindow.getWidth() != MW_width || MainWindow.getHeight() != MW_height) {
+                    changeWindowSize();
+                }
+            }
+            catch(Exception e) {
+                System.out.println("BLAD Zmiana rozmiaru okna");
+            }
+        }
     }
     
     public static void Connect()
@@ -103,7 +119,7 @@ public class A_Chat_Client_GUI {
         LogInWindow.setTitle("What's your name?");
         LogInWindow.setSize(400, 100);
         LogInWindow.setLocation(250, 200);
-        LogInWindow.setResizable(false);
+        LogInWindow.setResizable(true);
         P_LogIn = new JPanel();
         P_LogIn.add(L_EnterUserName);
         //ustawienie domyœlnie nazwy uzytkownika na bana + kolejne 
@@ -118,12 +134,33 @@ public class A_Chat_Client_GUI {
         LogInWindow.setVisible(true);
     }
     
+    
+    public static void changeWindowSize() {
+
+        B_DISCONNECT.setBounds(MainWindow.getWidth()/50, MainWindow.getHeight()/8, (int)(MainWindow.getWidth()/4.5), (int)(MainWindow.getHeight()/12.8));
+        B_CONNECT.setBounds(MainWindow.getWidth()/4, MainWindow.getHeight()/8, (int)(MainWindow.getWidth()/4.5), (int)(MainWindow.getHeight()/12.8));
+        B_SEND.setBounds((int)(MainWindow.getWidth()/2.1), MainWindow.getHeight()/8, (int)(MainWindow.getWidth()/6), (int)(MainWindow.getHeight()/12.8));
+        B_ABOUT.setBounds((int)(MainWindow.getWidth()/1.5), MainWindow.getHeight()/8, (int)(MainWindow.getWidth()/7), (int)(MainWindow.getHeight()/12.8));
+        B_HELP.setBounds((int)(MainWindow.getWidth()/1.2), MainWindow.getHeight()/8, (int)(MainWindow.getWidth()/7), (int)(MainWindow.getHeight()/12.8));
+
+        L_Message.setBounds(MainWindow.getWidth()/50, MainWindow.getHeight()/32, (int)(MainWindow.getWidth()/8.3), (int)(MainWindow.getHeight()/16));
+        L_LoggedInAs.setBounds((int)(MainWindow.getWidth()/1.5), 0, (int)(MainWindow.getWidth()/3.5), (int)(MainWindow.getHeight()/21));
+        L_LoggedInAsBox.setBounds((int)(MainWindow.getWidth()/1.5), (int)(MainWindow.getHeight()/18.8), (int)(MainWindow.getWidth()/3.3), (int)(MainWindow.getHeight()/16));
+        L_Conversation.setBounds(MainWindow.getWidth()/5, (int)(MainWindow.getHeight()/4.6), (int)(MainWindow.getWidth()/3.3), (int)(MainWindow.getHeight()/20));
+        L_ONLINE.setBounds((int)(MainWindow.getWidth()/1.5), (int)(MainWindow.getHeight()/4.6), (int)(MainWindow.getWidth()/3.5), (int)(MainWindow.getHeight()/20));
+
+        SP_CONVERSATION.setBounds(MainWindow.getWidth()/50, (int)(MainWindow.getHeight()/3.6), (int)(MainWindow.getWidth()/1.6), (int)(MainWindow.getHeight()/1.8));
+        SP_ONLINE.setBounds((int)(MainWindow.getWidth()/1.45), (int)(MainWindow.getHeight()/3.6), (int)(MainWindow.getWidth()/3.8), (int)(MainWindow.getHeight()/1.8));
+
+        TF_Message.setBounds((int)(MainWindow.getWidth()/8), MainWindow.getHeight()/50, (int)(MainWindow.getWidth()/1.92), (int)(MainWindow.getHeight()/10.7));
+    }
+    
     public static void BuildMainWindow()
     {
         MainWindow.setTitle(UserName + "'s Chat Box");
         MainWindow.setSize(450, 500);
         MainWindow.setLocation(220, 180);
-        MainWindow.setResizable(false);
+        MainWindow.setResizable(true);
         ConfigureMainWindow();
         MainWindow_Action();
         MainWindow.setVisible(true);
@@ -193,7 +230,7 @@ public class A_Chat_Client_GUI {
         TA_CONVERSATION.setEditable(false);
         
         SP_CONVERSATION.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        SP_CONVERSATION.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        SP_CONVERSATION.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         SP_CONVERSATION.setViewportView(TA_CONVERSATION);
         MainWindow.getContentPane().add(SP_CONVERSATION);
         SP_CONVERSATION.setBounds(10, 90, 330, 180);
@@ -209,7 +246,7 @@ public class A_Chat_Client_GUI {
         //JL_ONLINE.setListData(TestNames);
         
         SP_ONLINE.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        SP_ONLINE.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        SP_ONLINE.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         SP_ONLINE.setViewportView(JL_ONLINE);
         MainWindow.getContentPane().add(SP_ONLINE);
         SP_ONLINE.setBounds(350, 90, 130, 180);
