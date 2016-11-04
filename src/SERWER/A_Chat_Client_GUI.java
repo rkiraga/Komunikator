@@ -40,7 +40,7 @@ public class A_Chat_Client_GUI {
     public  static JFrame ExitWindow = new JFrame();
     private static JPanel P_Exit = new JPanel();
     //public  static JTextField TF_UserNameBox = new JTextField(20);
-    private static JLabel      L_Exit = new JLabel("Are you sure?");
+    private static JLabel  L_Exit = new JLabel("Are you sure?");
     private static JButton B_EXIT_Yes = new JButton("Jestem siur");
     private static JButton B_EXIT_No  = new JButton("NEIN");
     
@@ -88,6 +88,15 @@ public class A_Chat_Client_GUI {
         B_DISCONNECT.setEnabled(false);
         B_CONNECT.setEnabled(true);
     }
+  
+    //funkcja losujaca numer bany
+    public static int randIntforUserName(int bound1, int bound2) {
+        //przedzia³y losowania
+        int min = Math.min(bound1, bound2); //wybiera wartosc min z przedzialu
+        int max = Math.max(bound1, bound2);
+        //math.random zwraca wynik od 0 do 1
+        return (int) (min + (Math.random() * (max - min)));
+    }
     
     public static void BuildLogInWindow()
     {
@@ -97,6 +106,10 @@ public class A_Chat_Client_GUI {
         LogInWindow.setResizable(false);
         P_LogIn = new JPanel();
         P_LogIn.add(L_EnterUserName);
+        //ustawienie domyœlnie nazwy uzytkownika na bana + kolejne 
+        //numery polaczonych 
+        //TF_UserNameBox.setText("bana_"+ String.valueOf(Serwer.connections.size() + 1)); 
+        TF_UserNameBox.setText("bana_ " + randIntforUserName(1,1000));
         P_LogIn.add(TF_UserNameBox);
         P_LogIn.add(B_ENTER);
         LogInWindow.add(P_LogIn);
@@ -366,6 +379,31 @@ public class A_Chat_Client_GUI {
 				
 			}
         }
+        );
+        
+        TF_UserNameBox.addKeyListener(new java.awt.event.KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					ACTION_B_ENTER();
+				};
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		}
         );
         
         B_DISCONNECT.addActionListener(
