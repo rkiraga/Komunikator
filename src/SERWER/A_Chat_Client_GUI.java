@@ -154,12 +154,7 @@ public class A_Chat_Client_GUI {
 
         TF_Message.setBounds((int)(MainWindow.getWidth()/8), MainWindow.getHeight()/50, (int)(MainWindow.getWidth()/1.92), (int)(MainWindow.getHeight()/10.7));
     
-        SP_CONVERSATION.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
-            public void adjustmentValueChanged(AdjustmentEvent e) {
-                 e.getAdjustable().setValue(e.getAdjustable().getMaximum());
-            }
-        });
-    
+        TA_CONVERSATION.setCaretPosition(TA_CONVERSATION.getDocument().getLength());    
     }
     
     public static void BuildMainWindow()
