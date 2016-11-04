@@ -153,6 +153,13 @@ public class A_Chat_Client_GUI {
         SP_ONLINE.setBounds((int)(MainWindow.getWidth()/1.45), (int)(MainWindow.getHeight()/3.6), (int)(MainWindow.getWidth()/3.8), (int)(MainWindow.getHeight()/1.8));
 
         TF_Message.setBounds((int)(MainWindow.getWidth()/8), MainWindow.getHeight()/50, (int)(MainWindow.getWidth()/1.92), (int)(MainWindow.getHeight()/10.7));
+    
+        SP_CONVERSATION.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                 e.getAdjustable().setValue(e.getAdjustable().getMaximum());
+            }
+        });
+    
     }
     
     public static void BuildMainWindow()
