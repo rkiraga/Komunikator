@@ -46,6 +46,7 @@ public class A_Chat_Client implements Runnable{
         SOCK.close();
         JOptionPane.showMessageDialog(null, "Wyjeba³eœ siê");
         System.exit(0);
+        
     }
     
     public void CheckStream()

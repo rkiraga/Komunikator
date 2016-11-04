@@ -16,7 +16,7 @@ public class Klient {
             	printStream.println("czesc serwer, tu klient!\n");
 		        
             	InputStreamReader streamReader = new InputStreamReader(socket.getInputStream());
-            	BufferedReader bufferedReader = new BufferedReader(streamReader);
+            	BufferedReader  bufferedReader = new BufferedReader(streamReader);
             	
             	String message = bufferedReader.readLine();
             	System.out.println(message);
